@@ -5,7 +5,8 @@ export type EntryRow = {
   status: string
   pending: boolean
   abnormal: boolean
-  [field: string]: string | number | boolean
+  // 业务模块可以在通用字段之外挂自己的结构化内容（判定快照、重算日志、待办来源等）。
+  [field: string]: unknown
 }
 
 export type ModuleMeta = {

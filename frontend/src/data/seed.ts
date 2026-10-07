@@ -1,3 +1,4 @@
+import { buildAuxTodoSeed, buildTurbineSeed } from './turbine-seed'
 import type { EntryRow } from './types'
 
 // 示例数据：首次打开时播种，之后浏览器里的改动优先，重置才会回到这份。
@@ -178,50 +179,7 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "锅炉状态": "余热锅炉运行样例3"
     }
   ],
-  "turbine": [
-    {
-      "id": 1,
-      "status": "待并网",
-      "pending": true,
-      "abnormal": false,
-      "机组编号": "TURB-0001",
-      "机组转速": "汽轮发电机组样例1",
-      "发电功率": "汽轮发电机组样例1",
-      "上网电量": "汽轮发电机组样例1",
-      "厂用电量": "汽轮发电机组样例1",
-      "运行班次": "汽轮发电机组样例1",
-      "记录时间": "2026-09-01",
-      "机组状态": "汽轮发电机组样例1"
-    },
-    {
-      "id": 2,
-      "status": "运行中",
-      "pending": true,
-      "abnormal": true,
-      "机组编号": "TURB-0002",
-      "机组转速": "汽轮发电机组样例2",
-      "发电功率": "汽轮发电机组样例2",
-      "上网电量": "汽轮发电机组样例2",
-      "厂用电量": "汽轮发电机组样例2",
-      "运行班次": "汽轮发电机组样例2",
-      "记录时间": "2026-09-02",
-      "机组状态": "汽轮发电机组样例2"
-    },
-    {
-      "id": 3,
-      "status": "已解列",
-      "pending": false,
-      "abnormal": false,
-      "机组编号": "TURB-0003",
-      "机组转速": "汽轮发电机组样例3",
-      "发电功率": "汽轮发电机组样例3",
-      "上网电量": "汽轮发电机组样例3",
-      "厂用电量": "汽轮发电机组样例3",
-      "运行班次": "汽轮发电机组样例3",
-      "记录时间": "2026-09-03",
-      "机组状态": "汽轮发电机组样例3"
-    }
-  ],
+  "turbine": buildTurbineSeed() as unknown as EntryRow[],
   "fluegas": [
     {
       "id": 1,
@@ -484,7 +442,9 @@ export const SEED_ROWS: Record<string, EntryRow[]> = {
       "点检人员": "设备点检样例3",
       "点检日期": "2026-09-03",
       "点检状态": "设备点检样例3"
-    }
+    },
+    // 汽轮发电机组厂用电量超限自动派发的点检待办（来源记录 turbine:3）。
+    buildAuxTodoSeed(),
   ],
   "overhaul": [
     {
